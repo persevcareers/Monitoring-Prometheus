@@ -18,9 +18,9 @@
 - Prometheus utilizes TSDB for efficient data storage.
 - By default, data is stored locally with options for integrating remote storage to avoid single points of failure.
 
-#Installation ,
+# Installation ,
 
-##The Kubernetes Prometheus monitoring stack has the following components.
+## The Kubernetes Prometheus monitoring stack has the following components.
 
 - **Prometheus Server**
 - **Alert Manager**
@@ -39,7 +39,7 @@ Execute the following command to create a new namespace named `monitoring`:
 ```bash
 kubectl create namespace monitoring
 ```
-##Prometheus uses Kubernetes APIs to read all the available metrics from Nodes, Pods, Deployments, etc. For this reason, we need to create an RBAC policy with read access to required API groups and bind the policy to the monitoring namespace.
+## Prometheus uses Kubernetes APIs to read all the available metrics from Nodes, Pods, Deployments, etc. For this reason, we need to create an RBAC policy with read access to required API groups and bind the policy to the monitoring namespace.
 
 In the role, given below, you can see that we have added get, list, and watch permissions to nodes, services endpoints, pods, and ingresses. The role binding is bound to the monitoring namespace. If you have any use case to retrieve metrics from any other object, you need to add that in this cluster role.
 Create the role using the following command:
@@ -47,15 +47,16 @@ Create the role using the following command:
 ```bash
 
 kubectl create -f clusterRole.yaml
-Create a Config Map To Externalize Prometheus Configurations
-All configurations for Prometheus are part of prometheus.yaml file and all the alert rules for Alertmanager are configured in prometheus.rules.
 ```
+## Create a Config Map To Externalize Prometheus Configurations
+## All configurations for Prometheus are part of prometheus.yaml file and all the alert rules for Alertmanager are configured in prometheus.rules.
+
 By externalizing Prometheus configs to a Kubernetes config map, you don’t have to build the Prometheus image whenever you need to add or remove a configuration. You need to update the config map and restart the Prometheus pods to apply the new configuration.
 
-Step 1:
+- **Step 1:**
 Create a file called config-map.yaml and copy the file contents from this link.
 
-Step 2:
+- **Step 2:**
 Execute the following command to create the config map in Kubernetes:
 
 ```bash
