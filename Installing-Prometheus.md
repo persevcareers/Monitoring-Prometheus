@@ -104,3 +104,76 @@ To access the Prometheus dashboard over an IP or a DNS name, you need to expose 
 
 ```bash
 kubectl create -f prometheus-service.yaml --namespace=monitoring
+```
+
+# Setting Up Kube State Metrics
+
+The Kube State Metrics service provides many metrics that are not available by default. It's essential to deploy Kube State Metrics to monitor all your Kubernetes API objects like deployments, pods, jobs, cronjobs, etc.
+
+
+# What is Kube State Metrics?
+
+Kube State Metrics is a service that communicates with the Kubernetes API server to gather details about all the API objects, such as deployments, pods, daemonsets, StatefulSets, etc.
+
+Primarily, it produces metrics in Prometheus format, ensuring stability aligned with the Kubernetes API. It provides Kubernetes objects and resources metrics that cannot be directly obtained from native Kubernetes monitoring components.
+
+The Kube State Metrics service exposes all the metrics on the `/metrics` URI, allowing Prometheus to scrape all the metrics exposed by Kube State Metrics.
+
+Following are some of the important metrics you can obtain from Kube State Metrics:
+
+- Node status and node capacity (CPU and memory)
+- Replica-set compliance (desired/available/unavailable/updated status of replicas per deployment)
+- Pod status (waiting, running, ready, etc.)
+- Ingress metrics
+- PV (Persistent Volume) and PVC (Persistent Volume Claim) metrics
+- Daemonset and Statefulset metrics
+- Resource requests and limits
+- Job and Cronjob metrics
+
+
+# Kube State Metrics Setup
+
+To set up Kube State Metrics, follow these steps:
+
+1. **Service Account**: Create a service account for Kube State Metrics to operate under.
+
+2. **Cluster Role**: Define a cluster role granting access to all Kubernetes API objects for Kube State Metrics.
+
+3. **Cluster Role Binding**: Bind the service account with the cluster role, ensuring proper access permissions.
+
+4. **Kube State Metrics Deployment**: Deploy the Kube State Metrics service using a Kubernetes deployment.
+
+5. **Service**: Expose the metrics provided by Kube State Metrics through a Kubernetes service.
+
+
+
+# Deploying Kube State Metrics Objects
+
+All the above Kube State Metrics objects will be deployed in the `kube-system` namespace.
+
+To deploy the components, follow these steps:
+
+**Step 1**: Clone the Github repo:
+
+```bash
+git clone https://github.com/devopscube/kube-state-metrics-configs.git
+```
+
+ ## Step 2: Create Objects
+
+Create all the objects by pointing to the cloned directory:
+
+```bash
+kubectl apply -f kube-state-metrics-configs/
+```
+
+ ## Step 4: Check the deployment status using the following command.
+```bash
+kubectl get deployments kube-state-metrics -n kube-system
+```bash
+
+## Kube State Metrics Prometheus Config
+
+All the Kube State Metrics can be obtained from the Kube State service endpoint on the `/metrics` URI.
+
+This configuration can be added as part of the Prometheus job configuration. You need to add the following job configuration to your Prometheus config for Prometheus to scrape all the Kube State Metrics.
