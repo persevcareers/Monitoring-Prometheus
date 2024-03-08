@@ -170,7 +170,7 @@ kubectl apply -f kube-state-metrics-configs/
  ## Step 4: Check the deployment status using the following command.
 ```bash
 kubectl get deployments kube-state-metrics -n kube-system
-```bash
+```
 
 ## Kube State Metrics Prometheus Config
 
