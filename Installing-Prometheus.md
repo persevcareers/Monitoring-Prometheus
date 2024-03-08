@@ -206,7 +206,12 @@ kubectl create -f deployment.yaml
 kubectl create -f service.yaml
 ```
 
+## Use the following default username and password to log in. Once you log in with default credentials, it will prompt you to change the default password.
+
+User: admin
+Pass: admin
 Now you should be able to access the Grafana dashboard using any node IP on port 32000. 
+
 # Setting Up Alertmanager
 
 Alertmanager handles all the alerting mechanisms for Prometheus metrics. There are many integrations available to receive alerts from the Alertmanager (Slack, email, API endpoints, etc).
