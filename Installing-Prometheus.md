@@ -94,6 +94,8 @@ kubectl get deployments --namespace=monitoring
 
 # Connecting To Prometheus Dashboard
 
+
+
 ## Exposing Prometheus as a Service [NodePort & LoadBalancer]
 
 To access the Prometheus dashboard over an IP or a DNS name, you need to expose it as a Kubernetes service.
@@ -177,3 +179,37 @@ kubectl get deployments kube-state-metrics -n kube-system
 All the Kube State Metrics can be obtained from the Kube State service endpoint on the `/metrics` URI.
 
 This configuration can be added as part of the Prometheus job configuration. You need to add the following job configuration to your Prometheus config for Prometheus to scrape all the Kube State Metrics.
+
+
+## Setting Up Grafana
+Using Grafana you can create dashboards from Prometheus metrics to monitor the kubernetes cluster.
+
+``` bash
+git clone https://github.com/persevcareers/kubernetes-grafana
+```
+
+## Deploy Grafana On Kubernetes
+
+- **Step 1**: Create the configmap using the following command.
+``` bash
+kubectl create -f grafana-datasource-config.yaml
+```
+
+- **Step 2**: Create a file named deployment.yaml
+  
+``` bash
+kubectl create -f deployment.yaml
+```
+
+- **Step 3**:Create the service.
+``` bash
+kubectl create -f service.yaml
+```
+
+Now you should be able to access the Grafana dashboard using any node IP on port 32000. 
+# Setting Up Alertmanager
+
+Alertmanager handles all the alerting mechanisms for Prometheus metrics. There are many integrations available to receive alerts from the Alertmanager (Slack, email, API endpoints, etc).
+
+
+  
