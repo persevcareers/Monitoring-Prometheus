@@ -66,12 +66,12 @@ It creates two files inside the container.
 
 The prometheus.yaml contains all the configurations to discover pods and services running in the Kubernetes cluster dynamically. We have the following scrape jobs in our Prometheus scrape configuration:
 
-kubernetes-apiservers: It gets all the metrics from the API servers.
-kubernetes-nodes: It collects all the Kubernetes node metrics.
-kubernetes-pods: All the pod metrics get discovered if the pod metadata is annotated with prometheus.io/scrape and prometheus.io/port annotations.
-kubernetes-cadvisor: Collects all cAdvisor metrics.
-kubernetes-service-endpoints: All the Service endpoints are scrapped if the service metadata is annotated with prometheus.io/scrape and prometheus.io/port annotations. It can be used for black-box monitoring.
-The prometheus.rules contains all the alert rules for sending alerts to the Alertmanager.
+## kubernetes-apiservers: It gets all the metrics from the API servers.
+## kubernetes-nodes: It collects all the Kubernetes node metrics.
+## kubernetes-pods: All the pod metrics get discovered if the pod metadata is annotated with prometheus.io/scrape and prometheus.io/port annotations.
+## kubernetes-cadvisor: Collects all cAdvisor metrics.
+## kubernetes-service-endpoints: All the Service endpoints are scrapped if the service metadata is annotated with prometheus.io/scrape and prometheus.io/port annotations. It can be used for black-box monitoring.
+## The prometheus.rules contains all the alert rules for sending alerts to the Alertmanager.
 
 ##Create a Prometheus Deployment
 - **Step 1:**
@@ -91,3 +91,16 @@ You can check the created deployment using the following command:
 ```bash
 kubectl get deployments --namespace=monitoring
 ```
+
+# Connecting To Prometheus Dashboard
+
+## Exposing Prometheus as a Service [NodePort & LoadBalancer]
+
+To access the Prometheus dashboard over an IP or a DNS name, you need to expose it as a Kubernetes service.
+
+1. Create a file named `prometheus-service.yaml` and copy the following contents. This will expose Prometheus on all Kubernetes node IPs on port 30000.
+
+2. Create the service using the following command:
+
+```bash
+kubectl create -f prometheus-service.yaml --namespace=monitoring
