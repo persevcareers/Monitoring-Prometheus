@@ -216,5 +216,54 @@ Now you should be able to access the Grafana dashboard using any node IP on port
 
 Alertmanager handles all the alerting mechanisms for Prometheus metrics. There are many integrations available to receive alerts from the Alertmanager (Slack, email, API endpoints, etc).
 
+# Setting Up Alertmanager
+
+Alertmanager handles all the alerting mechanisms for Prometheus metrics. There are many integrations available to receive alerts from the Alertmanager (Slack, email, API endpoints, etc).
+
+## Alert Manager Setup
+
+Alert Manager setup involves the following key configurations:
+
+1. A config map for AlertManager configuration
+2. A config Map for AlertManager alert templates
+3. Alert Manager Kubernetes Deployment
+4. Alert Manager service to access the web UI.
+
+First, clone the repository containing the necessary configurations:
+
+```bash
+git clone https://github.com/persevcareers/kubernetes-alert-manager
+```
+
+# Config Map for Alert Manager Configuration
+
+# Alert Manager reads its configuration from a config.yaml file. It contains the configuration of alert template path, email, and other alert receiving configurations.
+
+# Let’s create the config map using kubectl.
+```bash
+kubectl create -f AlertManagerConfigmap.yaml
+```
+
+## Config Map for Alert Template
+
+# We need alert templates for all the receivers we use (email, Slack, etc). Alert manager will dynamically substitute the values and deliver alerts to the receivers based on the template. You can customize these templates based on your needs.
+
+
+# Create the configmap using kubectl.
+``` bash
+kubectl create -f AlertTemplateConfigMap.yaml
+```
+# Create a Deployment
+In this deployment, we will mount the two config maps we created.
+
+# Create the alert manager deployment using kubectl.
+```bash
+kubectl create -f Deployment.yaml
+```
+#Create the service using kubectl.
+```bash
+kubectl create -f Service.yaml
+```
+Now, you will be able to access Alert Manager on Node Port 31000.
 
   
