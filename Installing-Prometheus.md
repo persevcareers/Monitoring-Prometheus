@@ -18,3 +18,10 @@
 - Prometheus utilizes TSDB for efficient data storage.
 - By default, data is stored locally with options for integrating remote storage to avoid single points of failure.
 
+#Installation ,
+
+##The Kubernetes Prometheus monitoring stack has the following components.
+
+- **Prometheus Server**
+- **Alert Manager**
+- **Grafana**
