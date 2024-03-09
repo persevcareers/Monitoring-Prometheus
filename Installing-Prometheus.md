@@ -170,11 +170,16 @@ Create all the objects by pointing to the cloned directory:
 kubectl apply -f kube-state-metrics-configs/
 ```
 
- ## Step 4: Check the deployment status using the following command.
+ ## Step 3: Check the deployment status using the following command.
 ```bash
 kubectl get deployments kube-state-metrics -n kube-system
 ```
 
+## Step4: Expose the clusterIP ,
+```bash
+kubectl expose service <svcname> --port=port--target-port=port --type=NodePort --name=<newsvcname> -n kube-system
+kubectl expose service kube-state-metrics --port=8080 --target-port=8080 --type=NodePort --name=kube-state-metrics-nodeport -n kube-system
+```
 ## Kube State Metrics Prometheus Config
 
 All the Kube State Metrics can be obtained from the Kube State service endpoint on the `/metrics` URI.
