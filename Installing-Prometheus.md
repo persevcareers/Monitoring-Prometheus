@@ -237,7 +237,7 @@ git clone https://github.com/persevcareers/kubernetes-alert-manager
 
 # Config Map for Alert Manager Configuration
 
-# Alert Manager reads its configuration from a config.yaml file. It contains the configuration of alert template path, email, and other alert receiving configurations.
+## Alert Manager reads its configuration from a config.yaml file. It contains the configuration of alert template path, email, and other alert receiving configurations.
 
 # Let’s create the config map using kubectl.
 ```bash
