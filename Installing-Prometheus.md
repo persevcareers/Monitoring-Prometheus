@@ -27,8 +27,9 @@
 - **Grafana**
 
 ## Prometheus Kubernetes Manifests:
-- https://github.com/persevcareers/kubernetes-prometheus
-
+```bash
+git clone https://github.com/persevcareers/kubernetes-prometheus
+```
 
 # Create a Namespace & ClusterRole
 
