@@ -244,23 +244,23 @@ git clone https://github.com/persevcareers/kubernetes-alert-manager
 kubectl create -f AlertManagerConfigmap.yaml
 ```
 
-## Config Map for Alert Template
+# Config Map for Alert Template
 
-# We need alert templates for all the receivers we use (email, Slack, etc). Alert manager will dynamically substitute the values and deliver alerts to the receivers based on the template. You can customize these templates based on your needs.
+##We need alert templates for all the receivers we use (email, Slack, etc). Alert manager will dynamically substitute the values and deliver alerts to the receivers based on the template. You can customize these templates based on your needs.
 
 
-# Create the configmap using kubectl.
+## Create the configmap using kubectl.
 ``` bash
 kubectl create -f AlertTemplateConfigMap.yaml
 ```
-# Create a Deployment
+## Create a Deployment
 In this deployment, we will mount the two config maps we created.
 
-# Create the alert manager deployment using kubectl.
+## Create the alert manager deployment using kubectl.
 ```bash
 kubectl create -f Deployment.yaml
 ```
-#Create the service using kubectl.
+## Create the service using kubectl.
 ```bash
 kubectl create -f Service.yaml
 ```
