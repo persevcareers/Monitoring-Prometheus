@@ -159,7 +159,7 @@ To deploy the components, follow these steps:
 **Step 1**: Clone the Github repo:
 
 ```bash
-git clone https://github.com/devopscube/kube-state-metrics-configs.git
+https://github.com/persevcareers/kubernetes-monitoring.git
 ```
 
  ## Step 2: Create Objects
@@ -191,7 +191,7 @@ This configuration can be added as part of the Prometheus job configuration. You
 Using Grafana you can create dashboards from Prometheus metrics to monitor the kubernetes cluster.
 
 ``` bash
-git clone https://github.com/persevcareers/kubernetes-grafana
+https://github.com/persevcareers/kubernetes-monitoring.git
 ```
 
 ## Deploy Grafana On Kubernetes
@@ -237,8 +237,8 @@ Alert Manager setup involves the following key configurations:
 
 First, clone the repository containing the necessary configurations:
 
-```bash
-git clone https://github.com/persevcareers/kubernetes-alert-manager
+``` bash
+https://github.com/persevcareers/kubernetes-monitoring.git
 ```
 
 # Config Map for Alert Manager Configuration
@@ -264,7 +264,7 @@ In this deployment, we will mount the two config maps we created.
 
 ## Create the alert manager deployment using kubectl.
 ```bash
-kubectl create -f Deployment.yaml
+kubectl create -f deployment.yaml
 ```
 ## Create the service using kubectl.
 ```bash
