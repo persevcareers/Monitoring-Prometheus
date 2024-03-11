@@ -1,4 +1,4 @@
-# Prometheus Monitoring Overview
+# Prometheus Monitoring 
 
 ## Metric Collection
 - **Pull Model**: Prometheus retrieves metrics over HTTP using a pull model.
