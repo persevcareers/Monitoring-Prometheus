@@ -29,6 +29,7 @@
 ## Prometheus Kubernetes Manifests:
 ```bash
 git clone https://github.com/persevcareers/kubernetes-prometheus
+cd prometheus
 ```
 
 # Create a Namespace & ClusterRole
@@ -159,7 +160,8 @@ To deploy the components, follow these steps:
 **Step 1**: Clone the Github repo:
 
 ```bash
-https://github.com/persevcareers/kubernetes-monitoring.git
+git clone https://github.com/persevcareers/kubernetes-monitoring.git
+cd kube-state-metrics
 ```
 
  ## Step 2: Create Objects
@@ -191,7 +193,8 @@ This configuration can be added as part of the Prometheus job configuration. You
 Using Grafana you can create dashboards from Prometheus metrics to monitor the kubernetes cluster.
 
 ``` bash
-https://github.com/persevcareers/kubernetes-monitoring.git
+git clone https://github.com/persevcareers/kubernetes-monitoring.git
+cd grafana
 ```
 
 ## Deploy Grafana On Kubernetes
@@ -238,7 +241,8 @@ Alert Manager setup involves the following key configurations:
 First, clone the repository containing the necessary configurations:
 
 ``` bash
-https://github.com/persevcareers/kubernetes-monitoring.git
+git clone https://github.com/persevcareers/kubernetes-monitoring.git
+cd alert-manager
 ```
 
 # Config Map for Alert Manager Configuration
@@ -272,4 +276,52 @@ kubectl create -f Service.yaml
 ```
 Now, you will be able to access Alert Manager on Node Port 31000.
 
-  
+By default, most of the Kubernetes clusters expose the metric server metrics (Cluster level metrics from the summary API) and Cadvisor (Container level metrics). It does not provide detailed node-level metrics.
+
+To get all the kubernetes node-level system metrics, you need to have a node-exporter running in all the kubernetes nodes. It collects all the Linux system metrics and exposes them via /metrics endpoint on port 9100
+
+Similarly, you need to install Kube state metrics to get all the metrics related to kubernetes objects.
+
+
+## Kubernetes Manifests
+
+The Kubernetes manifest used in this guide is present in the Github repository. Clone the repo to your local system.
+```bash
+git clone https://github.com/persevcareers/kubernetes-monitoring.git
+cd node-exporter
+```
+
+#Deploy the daemonset using the kubectl command.
+```bash
+kubectl create -f daemonset.yaml
+```
+#List the daemonset in the monitoring namespace and make sure it is in the available state.
+```bash
+kubectl get daemonset -n monitoring
+``
+#check the service’s endpoints and see if it is pointing to all the daemonset pods.
+```bash
+kubectl get endpoints -n monitoring
+```
+
+##Node-exporter Prometheus Config
+We have the node-exporter daemonset running on port 9100 and a service pointing to all the node-exporter pods.
+
+You need to add a scrape config to the Prometheus config file to discover all the node-exporter pods.
+
+Let’s take a look at the Prometheus scrape config required to scrape the node-exporter metrics.
+```bash
+      - job_name: 'node-exporter'
+        kubernetes_sd_configs:
+          - role: endpoints
+        relabel_configs:
+        - source_labels: [__meta_kubernetes_endpoints_name]
+          regex: 'node-exporter'
+          action: keep
+```
+
+In this config, we mention the role as endpoints to scrape the endpoints with the name node-exporter.
+
+See Prometheus config map (https://github.com/persevcareers/kubernetes-monitoring/blob/main/prometheus/config-map.yaml)file we have created for the Kubernetes monitoring . It includes all the scrape configs for kubernetes components.
+
+Once you add the scrape config to Prometheus, you will see the node-exporter targets in Prometheus, as shown below.
