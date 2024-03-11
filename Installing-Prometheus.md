@@ -67,12 +67,12 @@ It creates two files inside the container.
 
 The prometheus.yaml contains all the configurations to discover pods and services running in the Kubernetes cluster dynamically. We have the following scrape jobs in our Prometheus scrape configuration:
 
-## kubernetes-apiservers: It gets all the metrics from the API servers.
-## kubernetes-nodes: It collects all the Kubernetes node metrics.
-## kubernetes-pods: All the pod metrics get discovered if the pod metadata is annotated with prometheus.io/scrape and prometheus.io/port annotations.
-## kubernetes-cadvisor: Collects all cAdvisor metrics.
-## kubernetes-service-endpoints: All the Service endpoints are scrapped if the service metadata is annotated with prometheus.io/scrape and prometheus.io/port annotations. It can be used for black-box monitoring.
-## The prometheus.rules contains all the alert rules for sending alerts to the Alertmanager.
+#kubernetes-apiservers: It gets all the metrics from the API servers.
+#kubernetes-nodes: It collects all the Kubernetes node metrics.
+#kubernetes-pods: All the pod metrics get discovered if the pod metadata is annotated with prometheus.io/scrape and prometheus.io/port annotations.
+#kubernetes-cadvisor: Collects all cAdvisor metrics.
+#kubernetes-service-endpoints: All the Service endpoints are scrapped if the service metadata is annotated with prometheus.io/scrape and prometheus.io/port annotations. It can be used for black-box monitoring.
+#The prometheus.rules contains all the alert rules for sending alerts to the Alertmanager.
 
 ##Create a Prometheus Deployment
 - **Step 1:**
