@@ -24,6 +24,8 @@
 
 - **Prometheus Server**
 - **Alert Manager**
+- **Node Exporter**
+- **Kube State Metrics**
 - **Grafana**
 
 ## Prometheus Kubernetes Manifests:
