@@ -36,17 +36,17 @@ cd prometheus
 
 # Create a Namespace & ClusterRole
 
-First, we will create a Kubernetes namespace for all our monitoring components. If you don’t create a dedicated namespace, all the Prometheus Kubernetes deployment objects get deployed on the default namespace.
+- **First, we will create a Kubernetes namespace for all our monitoring components. If you don’t create a dedicated namespace, all the Prometheus Kubernetes deployment objects get deployed on the default namespace.**
 
-Execute the following command to create a new namespace named `monitoring`:
+- **Execute the following command to create a new namespace named `monitoring`:**
 
 ```bash
 kubectl create namespace monitoring
 ```
 ## Prometheus uses Kubernetes APIs to read all the available metrics from Nodes, Pods, Deployments, etc. For this reason, we need to create an RBAC policy with read access to required API groups and bind the policy to the monitoring namespace.
 
-In the role, given below, you can see that we have added get, list, and watch permissions to nodes, services endpoints, pods, and ingresses. The role binding is bound to the monitoring namespace. If you have any use case to retrieve metrics from any other object, you need to add that in this cluster role.
-Create the role using the following command:
+- **In the role, given below, you can see that we have added get, list, and watch permissions to nodes, services endpoints, pods, and ingresses. The role binding is bound to the monitoring namespace. If you have any use case to retrieve metrics from any other object, you need to add that in this cluster role.
+Create the role using the following command:**
 
 ```bash
 
@@ -70,12 +70,12 @@ It creates two files inside the container.
 
 The prometheus.yaml contains all the configurations to discover pods and services running in the Kubernetes cluster dynamically. We have the following scrape jobs in our Prometheus scrape configuration:
 
-#kubernetes-apiservers: It gets all the metrics from the API servers.
-#kubernetes-nodes: It collects all the Kubernetes node metrics.
-#kubernetes-pods: All the pod metrics get discovered if the pod metadata is annotated with prometheus.io/scrape and prometheus.io/port annotations.
-#kubernetes-cadvisor: Collects all cAdvisor metrics.
-#kubernetes-service-endpoints: All the Service endpoints are scrapped if the service metadata is annotated with prometheus.io/scrape and prometheus.io/port annotations. It can be used for black-box monitoring.
-#The prometheus.rules contains all the alert rules for sending alerts to the Alertmanager.
+- **kubernetes-apiservers: It gets all the metrics from the API servers.**
+- **kubernetes-nodes: It collects all the Kubernetes node metrics.**
+- **kubernetes-pods: All the pod metrics get discovered if the pod metadata is annotated with prometheus.io/scrape and prometheus.io/port annotations.**
+- **kubernetes-cadvisor: Collects all cAdvisor metrics.**
+- **kubernetes-service-endpoints: All the Service endpoints are scrapped if the service metadata is annotated with prometheus.io/scrape and prometheus.io/port annotations. It can be used for black-box monitoring.**
+- **The prometheus.rules contains all the alert rules for sending alerts to the Alertmanager.**
 
 ##Create a Prometheus Deployment
 - **Step 1:**
