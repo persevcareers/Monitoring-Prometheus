@@ -167,7 +167,7 @@ https://github.com/persevcareers/kubernetes-monitoring.git
 Create all the objects by pointing to the cloned directory:
 
 ```bash
-kubectl apply -f kube-state-metrics-configs/
+kubectl apply -f kube-state-metrics/
 ```
 
  ## Step 3: Check the deployment status using the following command.
