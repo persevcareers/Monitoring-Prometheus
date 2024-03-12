@@ -43,7 +43,7 @@ cd prometheus
 ```bash
 kubectl create namespace monitoring
 ```
-## Prometheus uses Kubernetes APIs to read all the available metrics from Nodes, Pods, Deployments, etc. For this reason, we need to create an RBAC policy with read access to required API groups and bind the policy to the monitoring namespace.
+Prometheus uses Kubernetes APIs to read all the available metrics from Nodes, Pods, Deployments, etc. For this reason, we need to create an RBAC policy with read access to required API groups and bind the policy to the monitoring namespace.
 
 - **In the role, given below, you can see that we have added get, list, and watch permissions to nodes, services endpoints, pods, and ingresses. The role binding is bound to the monitoring namespace. If you have any use case to retrieve metrics from any other object, you need to add that in this cluster role.
 Create the role using the following command:**
@@ -284,7 +284,15 @@ To get all the kubernetes node-level system metrics, you need to have a node-exp
 
 Similarly, you need to install Kube state metrics to get all the metrics related to kubernetes objects.
 
+## Setup Prometheus Node Exporter on Kubernetes
+By default, most of the Kubernetes clusters expose the metric server metrics (Cluster level metrics from the summary API) and Cadvisor (Container level metrics). It does not provide detailed node-level metrics.
 
+To get all the kubernetes node-level system metrics, you need to have a node-exporter running in all the kubernetes nodes. It collects all the Linux system metrics and exposes them via /metrics endpoint on port 9100
+
+Here is what we are going to do.
+
+Deploy node exporter on all the Kubernetes nodes as a daemonset. Daemonset makes sure one instance of node-exporter is running in all the nodes. It exposes all the node metrics on port 9100 on the /metrics endpoint
+Create a service that listens on port 9100 and points to all the daemonset node exporter pods. We would be monitoring the service endpoints (Node exporter pods) from Prometheus using the endpoint job config. More explanation on this in the Prometheus config part.
 ## Kubernetes Manifests
 
 The Kubernetes manifest used in this guide is present in the Github repository. Clone the repo to your local system.
