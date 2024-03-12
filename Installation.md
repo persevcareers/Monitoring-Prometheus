@@ -270,7 +270,7 @@ In this deployment, we will mount the two config maps we created.
 
 ## Create the alert manager deployment using kubectl.
 ```bash
-kubectl create -f deployment.yaml
+kubectl create -f deployment.yml
 ```
 ## Create the service using kubectl.
 ```bash
