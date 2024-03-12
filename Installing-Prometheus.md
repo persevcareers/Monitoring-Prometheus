@@ -30,7 +30,7 @@
 
 ## Prometheus Kubernetes Manifests:
 ```bash
-git clone https://github.com/persevcareers/kubernetes-prometheus
+git clone https://github.com/persevcareers/kubernetes-monitoring.git
 cd prometheus
 ```
 
