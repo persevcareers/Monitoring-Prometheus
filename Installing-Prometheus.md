@@ -332,6 +332,6 @@ Let’s take a look at the Prometheus scrape config required to scrape the node-
 
 - **In this config, we mention the role as endpoints to scrape the endpoints with the name node-exporter.**
 
-- ** See Prometheus config map (https://github.com/persevcareers/kubernetes-monitoring/blob/main/prometheus/config-map.yaml)file we have created for the Kubernetes monitoring . It includes all the scrape configs for kubernetes components.**
+- **See Prometheus config map (https://github.com/persevcareers/kubernetes-monitoring/blob/main/prometheus/config-map.yaml)file we have created for the Kubernetes monitoring . It includes all the scrape configs for kubernetes components.**
 
-- ** Once you add the scrape config to Prometheus, you will see the node-exporter targets in Prometheus, as shown below.**
+- **Once you add the scrape config to Prometheus, you will see the node-exporter targets in Prometheus, as shown below.**
