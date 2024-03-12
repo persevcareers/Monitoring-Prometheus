@@ -301,20 +301,20 @@ git clone https://github.com/persevcareers/kubernetes-monitoring.git
 cd node-exporter
 ```
 
-#Deploy the daemonset using the kubectl command.
+# Deploy the daemonset using the kubectl command.
 ```bash
 kubectl create -f daemonset.yaml
 ```
-#List the daemonset in the monitoring namespace and make sure it is in the available state.
+# List the daemonset in the monitoring namespace and make sure it is in the available state.
 ```bash
 kubectl get daemonset -n monitoring
 ``
-#check the service’s endpoints and see if it is pointing to all the daemonset pods.
+# Check the service’s endpoints and see if it is pointing to all the daemonset pods.
 ```bash
 kubectl get endpoints -n monitoring
 ```
 
-##Node-exporter Prometheus Config
+## Node-exporter Prometheus Config
 We have the node-exporter daemonset running on port 9100 and a service pointing to all the node-exporter pods.
 
 You need to add a scrape config to the Prometheus config file to discover all the node-exporter pods.
@@ -330,8 +330,8 @@ Let’s take a look at the Prometheus scrape config required to scrape the node-
           action: keep
 ```
 
-In this config, we mention the role as endpoints to scrape the endpoints with the name node-exporter.
+- **In this config, we mention the role as endpoints to scrape the endpoints with the name node-exporter.**
 
-See Prometheus config map (https://github.com/persevcareers/kubernetes-monitoring/blob/main/prometheus/config-map.yaml)file we have created for the Kubernetes monitoring . It includes all the scrape configs for kubernetes components.
+- ** See Prometheus config map (https://github.com/persevcareers/kubernetes-monitoring/blob/main/prometheus/config-map.yaml)file we have created for the Kubernetes monitoring . It includes all the scrape configs for kubernetes components.**
 
-Once you add the scrape config to Prometheus, you will see the node-exporter targets in Prometheus, as shown below.
+- ** Once you add the scrape config to Prometheus, you will see the node-exporter targets in Prometheus, as shown below.**
